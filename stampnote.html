@@ -24,14 +24,18 @@
     font-size: 120%;
     font-family:Arial;
   }
-  .title-img{
-   text-align: center;  /*横方向の中央揃え */
-    /*vertical-align: middle;  縦方向の中央揃え */
-  }
   .text-begin{
     text-align: left;
     font-family:Arial;
   }  
+  .table-img{
+    width:100%;
+    text-align:center;
+    margin-top:10px;
+    vertical-align: middle; /* 縦方向の中央揃え */
+    display: flex;          /* ブラウザSafari対策：画像の縦伸び防止 */
+    align-items: flex-start;  /* ブラウザSafari対策：画像の縦伸び防止 */
+  }
   .text-end{
     font-size:80%;
     text-align: left;
@@ -49,8 +53,8 @@
     </ul>
    </nav>
   <div id="title" class="page-title"></div>
+  <p id="nickname" class="text-begin"></p>  
   <table border="1" >
-    <p id="stamps" class="text-begin"></p>  
     <tbody>
       <tr >
         <td>
@@ -166,14 +170,9 @@
       </tr>
     </tbody>
   </table> 
-  <p class="text-end">※オレンジ色のみかんのスポットは訪問済みです。</p>
+  <p class="text-end" id="appendix">※オレンジ色のみかんのスポットは訪問済みです。</p>
 </body>
   <script>
-
-document.body.oncopy = function(event) { 
-  event.preventDefault(); 
-}
-    
       var area_no;
       if(window.localStorage){
           //エリア番号の読み取り
@@ -220,8 +219,8 @@ document.body.oncopy = function(event) {
                   e_img.src="icon/stamp_ng.png"
               }
               //ゲットしたスポット数
-              var e_stamps=document.getElementById("stamps");
-              e_stamps.textContent='あなたがゲットしているスタンプの数は' + _count + '個です。';
+              var _nickname=document.getElementById("nickname");
+              _nickname.textContent='あなたがゲットしているスタンプの数は' + _count + '個です。';
               //画像にクリックイベントを付加
                     e_img.addEventListener('click', function(event){
                         //クリックされた画像のファイル名を調べる
@@ -277,6 +276,7 @@ document.body.oncopy = function(event) {
   </script> 
 </body>
 </html>
+
 
 
 
