@@ -271,42 +271,86 @@
                     spot_jamp_detail_from_stampnote(2,str_id_no,array)
                 });          
               }
-          //ゲットしたスポット数
-          var _nickname=document.getElementById("nickname");
-          _nickname.textContent='あなたがゲットしているスタンプの数は' + _count + '個です。';
-          //画像がクリックされたときに発生するイベント
-          function spot_jamp_detail_from_stampnote(flag_element,str_target,markerList){
-              let total_spot=markerList.length  
-              let k=str_target-1
-              //当該スポットのデータをウェブストレージに保存して、詳細ページに遷移
-              let s_lat=markerList[k].lat              //スポットの北緯を変数に代入
-              let s_lng=markerList[k].lng              //スポットの東経を変数に代入
-              let s_title=markerList[k].name;          //スポットの名称を変数に代入
-              let s_img=markerList[k].file;            //スポットの画像ファイル名を変数に代入
-              let s_address=markerList[k].address;        //スポットの住所を変数に代入
-              let s_address_detail=markerList[k].detail; //スポットの場所の詳細を変数に代入
-              let s_era=markerList[k].era;            //スポットの年代を変数に代入
-              let s_explanation=markerList[k].exp;    //スポットに関する説明を変数に代入
-              let s_yesno=markerList[k].yn;         //スポットの訪問の有無を変数に代入
-              let s_flag=-1 //スポットの詳細を読み込む際：チェックインのページから→s_flag=1、スタンプ帳とスポットリストのページから→s_flag=-1
-              //詳細ボタンがクリックされたときに、当該スポットのデータの一部を配列に格納
-              let spot_array=[s_lat,s_lng,s_title,s_img,s_address,s_address_detail,s_era,s_explanation,s_yesno,s_flag];
-              //ローカルストレージに「selected-spot%地域番号」のキーで選択されたスポットのデータ配列を保存
-              //配列をJSONデータに返還し、json_stringという変数に一括代入
-                key_select="selected_spot%" + area_no;
-                let json_string=JSON.stringify(spot_array);   
-                localStorage.setItem(key_select,json_string);
-              //詳細のページに遷移
-              window.location.href ='detail.html'
-            }        
+              //ゲットしたスポット数
+              var _nickname=document.getElementById("nickname");
+              _nickname.textContent='あなたがゲットしているスタンプの数は' + _count + '個です。';
+              //画像がクリックされたときに発生するイベント
+              function spot_jamp_detail_from_stampnote(flag_element,str_target,markerList){
+                  let total_spot=markerList.length  
+                  let k=str_target-1
+                  //当該スポットのデータをウェブストレージに保存して、詳細ページに遷移
+                  let s_lat=markerList[k].lat              //スポットの北緯を変数に代入
+                  let s_lng=markerList[k].lng              //スポットの東経を変数に代入
+                  let s_title=markerList[k].name;          //スポットの名称を変数に代入
+                  let s_img=markerList[k].file;            //スポットの画像ファイル名を変数に代入
+                  let s_address=markerList[k].address;        //スポットの住所を変数に代入
+                  let s_address_detail=markerList[k].detail; //スポットの場所の詳細を変数に代入
+                  let s_era=markerList[k].era;            //スポットの年代を変数に代入
+                  let s_explanation=markerList[k].exp;    //スポットに関する説明を変数に代入
+                  let s_yesno=markerList[k].yn;         //スポットの訪問の有無を変数に代入
+                  let s_flag=-1 //スポットの詳細を読み込む際：チェックインのページから→s_flag=1、スタンプ帳とスポットリストのページから→s_flag=-1
+                  //詳細ボタンがクリックされたときに、当該スポットのデータの一部を配列に格納
+                  let spot_array=[s_lat,s_lng,s_title,s_img,s_address,s_address_detail,s_era,s_explanation,s_yesno,s_flag];
+                  //ローカルストレージに「selected-spot%地域番号」のキーで選択されたスポットのデータ配列を保存
+                  //配列をJSONデータに返還し、json_stringという変数に一括代入
+                    key_select="selected_spot%" + area_no;
+                    let json_string=JSON.stringify(spot_array);   
+                    localStorage.setItem(key_select,json_string);
+                  //詳細のページに遷移
+                  window.location.href ='detail.html'
+                }        
       }
       else
       {
             alert('ローカルストレージは使えません');
       }
+      function prompt_nickname(){
+        //実行ボタンがクリックされたときに発生するイベントを記述
+          var button=document.getElementById("button");
+          button.addEventListener("click",function(e){
+            e.preventDefault();
+            _nickname=document.getElementById("name").value;
+            if(_nickname.length<3){
+              alert("ニックネームは文字数は３文字以上にしてください。");
+              document.getElementById("name").value="";
+              return; //処理を中断
+            }
+            if(_nickname.length>12){
+              alert("ニックネームは文字数は12文字以下にしてください。");
+              document.getElementById("name").value="";
+              return; //処理を中断
+            }
+            //入力した文字列の先頭が半角または全角のスペースになっていなことをチェックする
+            let strSearch1 = ' ';  // 探す文字（半角のスペース）
+            let strSearch2 = '　';  // 探す文字（全角のスペース）
+            if(_nickname[0] == strSearch1 || _nickname[0] == strSearch2){
+              alert("先頭の文字が半角スペースまたは全角スペースになっています。再入力してください。");
+              document.getElementById("name").value="";
+              return; //処理を中断
+            }
+            //入力した文字列の最後が半角または全角のスペースになっていなことをチェックする
+            if(_nickname[_nickname.length-1] == strSearch1 || _nickname[_nickname.length-1] == strSearch2){
+              alert("最後の文字が半角スペースまたは全角スペースになっています。再入力してください。");
+              document.getElementById("name").value="";
+              return; //処理を中断
+            }else{
+                //入力フォームを非表示にする。
+                document.getElementById("form_nickname").style.display='none';
+                //ニックネームを表示する。
+                var id_nickname=document.getElementById("nickname")
+                id_nickname.style.display='block';
+                id_nickname.textContent=_nickname + "　さん"; 
+                //ニックネームをキーを「nick_name%5」としてローカルストレージに保存する。
+                if(window.localStorage){
+                    localStorage.setItem(key_nickname,_nickname);
+                }
+            }
+          })
+        }
   </script> 
 </body>
 </html>
+
 
 
 
