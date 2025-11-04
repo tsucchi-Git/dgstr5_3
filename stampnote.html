@@ -195,6 +195,7 @@
 　　      area_no=localStorage.getItem('area_no%');
     　    //ニックネームのキーコードを作成
           key_nickname="nick_name%" + area_no
+                    localStorage.removeItem(key_nickname); 
           //ローカルストレージからキー「selected-spot%地域番号」で基礎データを読み込み配列arrayに格納
           if (localStorage.getItem(key_nickname) === null) {
               //ニックネーム入力のプロンプトの関数を呼び出し
@@ -307,6 +308,7 @@
       function prompt_nickname(){
         //実行ボタンがクリックされたときに発生するイベントを記述
           var button=document.getElementById("button");
+        alert('aaa');
           button.addEventListener("click",function(e){
             e.preventDefault();
             _nickname=document.getElementById("name").value;
@@ -350,6 +352,7 @@
   </script> 
 </body>
 </html>
+
 
 
 
