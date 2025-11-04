@@ -195,7 +195,7 @@
 　　      area_no=localStorage.getItem('area_no%');
     　    //ニックネームのキーコードを作成
           key_nickname="nick_name%" + area_no
-                    localStorage.removeItem(key_nickname); 
+                    //localStorage.removeItem(key_nickname); 
           //ローカルストレージからキー「selected-spot%地域番号」で基礎データを読み込み配列arrayに格納
           if (localStorage.getItem(key_nickname) === null) {
               //ニックネーム入力のプロンプトの関数を呼び出し
@@ -352,6 +352,7 @@
   </script> 
 </body>
 </html>
+
 
 
 
