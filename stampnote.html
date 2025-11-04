@@ -42,6 +42,11 @@
     color:blue;
     font-family:Arial;
   }
+  .form{
+    padding: 10px;
+    border: 1px solid #333;
+    background: #c9f506;
+  }
 </style>
 <body>
   <nav>
@@ -55,11 +60,11 @@
   <div id="title" class="page-title"></div>
   <p id="nickname" class="text-begin"></p>  
   <form id="form_nickname" class="form">
-      <lable>スタンプ帳にニックネームを表示します。<br>好きな名前を入力してください。<br><br></lable>
+      <lable>スタンプ帳にニックネームが表示されます。<br>好きな名前を入力してください。<br><br></lable>
       <lable for "textform">ニックネーム：</lable>
       <input type="text" id="name">
       <button id="button">実行</button>
-      <lable for "textform"><br>※３～１２文字で入力してください。<br>ニックネームは途中で変更できません。</lable>
+      <lable for "textform"><br>※３～１２文字で入力してください。<br>※ニックネームは途中で変更できません。</lable>
   </form>
   <table border="1" id="table_display>
     <tbody>
@@ -204,7 +209,7 @@
               id_nickname.style.display='block';
               id_nickname.textContent=_nickname + "　さん"; 
             }
-            //
+            //ローカルストレージの基礎データ読み込みのためのキーコードを設定
         　  key_all="all_basic_data%" + area_no;
             //ローカルストレージの基礎データを取得→配列名arrayに格納、キーは「all_basic_data%地域番号」
             let json=localStorage.getItem(key_all);        　
@@ -245,31 +250,30 @@
                 else{
                     e_img.src="icon/stamp_ng.png"
                 }
-                //ゲットしたスポット数
-                var _nickname=document.getElementById("nickname");
-                _nickname.textContent='あなたがゲットしているスタンプの数は' + _count + '個です。';
                 //画像にクリックイベントを付加
-                      e_img.addEventListener('click', function(event){
-                          //クリックされた画像のファイル名を調べる
-                          const clickedElement = event.target;
-                          var str= clickedElement.id
-                          let str_search = str.indexOf('image') ;
-                          let str_text=str.substring(str_search);
-                          let str_id_no=str_text.replace("image","")
-                          spot_jamp_detail_from_stampnote(1,str_id_no,array)
-                      });
+                e_img.addEventListener('click', function(event){
+                    //クリックされた画像のファイル名を調べる
+                    const clickedElement = event.target;
+                    var str= clickedElement.id
+                    let str_search = str.indexOf('image') ;
+                    let str_text=str.substring(str_search);
+                    let str_id_no=str_text.replace("image","")
+                    spot_jamp_detail_from_stampnote(1,str_id_no,array)
+                });
                 //スポットの名称にクリックイベントを付加
-                      e_spot.addEventListener('click', function(event){
-                          //クリックされた画像のファイル名を調べる
-                          const clickedElement = event.target;
-                          var str= clickedElement.id
-                          let str_search = str.indexOf('spot') ;
-                          let str_text=str.substring(str_search);
-                          let str_id_no=str_text.replace("spot","")
-                          spot_jamp_detail_from_stampnote(2,str_id_no,array)
-                      });          
-            }
-
+                e_spot.addEventListener('click', function(event){
+                    //クリックされた画像のファイル名を調べる
+                    const clickedElement = event.target;
+                    var str= clickedElement.id
+                    let str_search = str.indexOf('spot') ;
+                    let str_text=str.substring(str_search);
+                    let str_id_no=str_text.replace("spot","")
+                    spot_jamp_detail_from_stampnote(2,str_id_no,array)
+                });          
+              }
+          //ゲットしたスポット数
+          var _nickname=document.getElementById("nickname");
+          _nickname.textContent='あなたがゲットしているスタンプの数は' + _count + '個です。';
           //画像がクリックされたときに発生するイベント
           function spot_jamp_detail_from_stampnote(flag_element,str_target,markerList){
               let total_spot=markerList.length  
@@ -303,6 +307,7 @@
   </script> 
 </body>
 </html>
+
 
 
 
