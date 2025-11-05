@@ -263,10 +263,10 @@
             //ローカルストレージにニックネームが保存されていない場合は、入力formを表示する。
             if (localStorage.getItem(key_nickname) === null) {
               //ニックネーム、スタンプ一覧表、注釈を非表示にする
-              // document.getElementById("nickname").style.display='none';
-              // document.getElementById("table_display").style.display='none';
-              // document.getElementById("appendix").style.display='none';
-              //ニックネーム入力のプロンプトの関数を呼び出し
+              document.getElementById("nickname").style.display='none';
+              document.getElementById("table_display").style.display='none';
+              document.getElementById("appendix").style.display='none';
+              ニックネーム入力のプロンプトの関数を呼び出し
               prompt_nickname();
             } else {
               //入力フォームを非表示にする。
@@ -358,6 +358,7 @@
   </script> 
 </body>
 </html>
+
 
 
 
