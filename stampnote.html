@@ -64,7 +64,7 @@
       <lable for "textform">ニックネーム：</lable>
       <input type="text" id="name">
       <button id="button">実行</button>
-      <lable for "textform"><br>※３～１２文字で入力してください。<br>※ニックネームは途中で変更できません。</lable>
+      <lable for "textform"><br>※３～１０文字で入力してください。<br>※ニックネームは途中で変更できません。</lable>
   </form>
   <table border="1" id="table_display">
     <tbody>
@@ -273,13 +273,8 @@
               document.getElementById("nickname").style.display='block';
               document.getElementById("table_display").style.display='block';
               document.getElementById("appendix").style.display='block';
-              document.getElementById("nickname").textContent=_nickname + "　さん　　スタンプ獲得数：" + _count +' 個';
+              document.getElementById("nickname").textContent=_nickname + " さん >>> スタンプ：" + _count +' 個';
             }
-      
-
-
-
-        
               //画像がクリックされたときに発生するイベント
               function spot_jamp_detail_from_stampnote(flag_element,str_target,markerList){
                   let total_spot=markerList.length  
@@ -305,7 +300,6 @@
                   //詳細のページに遷移
                   window.location.href ='detail.html'
                 }        
-
       }
       else
       {
@@ -329,8 +323,8 @@
                   document.getElementById("name").value="";
                   return; //処理を中断
                 }
-                if(_nickname.length>12){
-                  alert("ニックネームは文字数は12文字以下にしてください。");
+                if(_nickname.length>10){
+                  alert("ニックネームは文字数は１０文字以下にしてください。");
                   document.getElementById("name").value="";
                   return; //処理を中断
                 }
@@ -354,7 +348,7 @@
                     document.getElementById("nickname").style.display='block';
                     document.getElementById("table_display").style.display='block';
                     document.getElementById("appendix").style.display='block';
-                    document.getElementById("nickname").textContent=_nickname + " さん >>> スタンプ獲得数：" + _count +' 個';
+                    document.getElementById("nickname").textContent=_nickname + " さん >>> スタンプ：" + _count +' 個';
 
                     //ニックネームをキーを「nick_name%5」としてローカルストレージに保存する。
                     if(window.localStorage){
@@ -366,6 +360,7 @@
   </script> 
 </body>
 </html>
+
 
 
 
