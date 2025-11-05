@@ -196,7 +196,7 @@
 　　      area_no=localStorage.getItem('area_no%');
     　    //ニックネームのキーコードを作成
           key_nickname="nick_name%" + area_no
-          //localStorage.removeItem(key_nickname);   //ニックネームのローカルストレージを削除
+          localStorage.removeItem(key_nickname);   //ニックネームのローカルストレージを削除
             //ローカルストレージの基礎データ読み込みのためのキーコードを設定
         　  key_all="all_basic_data%" + area_no;
             //ローカルストレージの基礎データを取得→配列名arrayに格納、キーは「all_basic_data%地域番号」
@@ -261,10 +261,6 @@
               }
             //ローカルストレージにニックネームが保存されていない場合は、入力formを表示する。
             if (localStorage.getItem(key_nickname) === null) {
-              //ニックネーム、スタンプ一覧表、注釈を非表示にする
-              document.getElementById("nickname").style.display='none';
-              document.getElementById("table_display").style.display='none';
-              document.getElementById("appendix").style.display='none';
               //ニックネーム入力のプロンプトの関数を呼び出し
               prompt_nickname();
             } else {
@@ -315,6 +311,10 @@
             alert('ローカルストレージは使えません');
       }
       function prompt_nickname(){
+        //ニックネーム、スタンプ一覧表、注釈を非表示にする
+          document.getElementById("nickname").style.display='none';
+          document.getElementById("table_display").style.display='none';
+          document.getElementById("appendix").style.display='none';
         //実行ボタンがクリックされたときに発生するイベントを記述
           var button=document.getElementById("button");
           button.addEventListener("click",function(e){
@@ -357,6 +357,7 @@
   </script> 
 </body>
 </html>
+
 
 
 
