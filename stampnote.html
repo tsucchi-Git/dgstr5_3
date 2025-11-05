@@ -190,26 +190,13 @@
       var area_no;
       var _nickname;  //ニックネームの文字列
       var key_nickname; //ニックネームのローカルストレージのキーコード
+      var _count; //獲得スタンプ数 
       if(window.localStorage){
           //エリア番号の読み取り
 　　      area_no=localStorage.getItem('area_no%');
     　    //ニックネームのキーコードを作成
           key_nickname="nick_name%" + area_no
-                    //localStorage.removeItem(key_nickname); 
-          //ローカルストレージからキー「selected-spot%地域番号」で基礎データを読み込み配列arrayに格納
-          if (localStorage.getItem(key_nickname) === null) {
-              //ニックネーム入力のプロンプトの関数を呼び出し
-              prompt_nickname();            
-            } else {
-              //入力フォームを非表示にする。
-              document.getElementById("form_nickname").style.display='none';
-              //ローカルストレージからニックネームの読み込み
-              _nickname=localStorage.getItem(key_nickname);
-              //ニックネームを表示する。
-              var id_nickname=document.getElementById("nickname")
-              id_nickname.style.display='block';
-              id_nickname.textContent=_nickname + "　さん"; 
-            }
+          //localStorage.removeItem(key_nickname);   //ニックネームのローカルストレージを削除
             //ローカルストレージの基礎データ読み込みのためのキーコードを設定
         　  key_all="all_basic_data%" + area_no;
             //ローカルストレージの基礎データを取得→配列名arrayに格納、キーは「all_basic_data%地域番号」
@@ -219,7 +206,7 @@
             key_visit="visit_data%" + area_no;  
             let json_visit=localStorage.getItem(key_visit);
             visit_yn=JSON.parse(json_visit); //[-1,-1,-1,-1,-1,-1]
-            let _count=0
+            _count=0
             //タイトル
             var title_text=document.getElementById("title");
             if(area_no==1){
@@ -272,9 +259,30 @@
                     spot_jamp_detail_from_stampnote(2,str_id_no,array)
                 });          
               }
-              //ゲットしたスポット数
-              var _nickname=document.getElementById("nickname");
-              _nickname.textContent='あなたがゲットしているスタンプの数は' + _count + '個です。';
+
+            //ローカルストレージにニックネームが保存されていない場合は、入力formを表示する。
+            if (localStorage.getItem(key_nickname) === null) {
+              //ニックネーム、スタンプ一覧表、注釈を非表示にする
+              document.getElementById("nickname").style.display='none';
+              document.getElementById("table_display").style.display='none';
+              document.getElementById("appendix").style.display='none';
+              //ニックネーム入力のプロンプトの関数を呼び出し
+              prompt_nickname();
+            } else {
+              //入力フォームを非表示にする。
+              document.getElementById("form_nickname").style.display='none';
+              //ローカルストレージからニックネームの読み込み
+              _nickname=localStorage.getItem(key_nickname);
+            }
+              //ニックネーム、スタンプ一覧表、注釈を表示にする
+              document.getElementById("nickname").style.display='block';
+              document.getElementById("table_display").style.display='block';
+              document.getElementById("appendix").style.display='block';
+              document.getElementById("nickname").textContent=_nickname + "　さん　　スタンプ獲得数：" + _count +' 個';             
+
+
+
+        
               //画像がクリックされたときに発生するイベント
               function spot_jamp_detail_from_stampnote(flag_element,str_target,markerList){
                   let total_spot=markerList.length  
@@ -300,6 +308,11 @@
                   //詳細のページに遷移
                   window.location.href ='detail.html'
                 }        
+              //ニックネーム、スタンプ一覧表、注釈を非表示にする
+              document.getElementById("nickname").style.display='none';
+              document.getElementById("table_display").style.display='none';
+              document.getElementById("appendix").style.display='none';
+
       }
       else
       {
@@ -338,10 +351,7 @@
             }else{
                 //入力フォームを非表示にする。
                 document.getElementById("form_nickname").style.display='none';
-                //ニックネームを表示する。
-                var id_nickname=document.getElementById("nickname")
-                id_nickname.style.display='block';
-                id_nickname.textContent=_nickname + "　さん"; 
+
                 //ニックネームをキーを「nick_name%5」としてローカルストレージに保存する。
                 if(window.localStorage){
                     localStorage.setItem(key_nickname,_nickname);
@@ -352,6 +362,7 @@
   </script> 
 </body>
 </html>
+
 
 
 
