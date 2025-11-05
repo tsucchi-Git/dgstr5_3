@@ -313,6 +313,8 @@
       }
       //ニックネーム入力用のフォーム
       function prompt_nickname(){
+        //インプットボックスをクリアする
+        document.getElementById("name").value = "";
         //ニックネーム、スタンプ一覧表、注釈を非表示にする
           document.getElementById("nickname").style.display='none';
           document.getElementById("table_display").style.display='none';
@@ -364,6 +366,7 @@
   </script> 
 </body>
 </html>
+
 
 
 
