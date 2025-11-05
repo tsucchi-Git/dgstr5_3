@@ -185,8 +185,6 @@
   <p class="text-end" id="appendix">※オレンジ色のみかんのスポットは訪問済みです。</p>
 </body>
 <script>
-      //ニックネームを非表示にする。
-      //document.getElementById("nickname").style.display='none';
       var area_no;
       var _nickname;  //ニックネームの文字列
       var key_nickname; //ニックネームのローカルストレージのキーコード
@@ -196,8 +194,9 @@
 　　      area_no=localStorage.getItem('area_no%');
     　    //ニックネームのキーコードを作成
           key_nickname="nick_name%" + area_no
-          localStorage.removeItem(key_nickname);   //ニックネームのローカルストレージを削除
-            //ローカルストレージの基礎データ読み込みのためのキーコードを設定
+          //ニックネームのローカルストレージを削除
+          //localStorage.removeItem(key_nickname);   
+        　　//ローカルストレージの基礎データ読み込みのためのキーコードを設定
         　  key_all="all_basic_data%" + area_no;
             //ローカルストレージの基礎データを取得→配列名arrayに格納、キーは「all_basic_data%地域番号」
             let json=localStorage.getItem(key_all);        　
@@ -360,6 +359,7 @@
   </script> 
 </body>
 </html>
+
 
 
 
