@@ -200,11 +200,13 @@
       var _nickname;  //ニックネームの文字列
       var key_nickname; //ニックネームのローカルストレージのキーコード
       var _count; //獲得スタンプ数 
+      alert('111');
       if(window.localStorage){
           //エリア番号の読み取り
   　      area_no=localStorage.getItem('area_no%');
     　    //ニックネームのキーコードを作成
           key_nickname="nick_name%" + area_no;
+          alert('222');
           //ニックネームのローカルストレージを削除
           //localStorage.removeItem(key_nickname);   
         　　//ローカルストレージの基礎データ読み込みのためのキーコードを設定
@@ -382,3 +384,4 @@
   </script> 
 </body>
 </html>
+
