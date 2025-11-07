@@ -202,7 +202,7 @@
       var _count; //獲得スタンプ数 
       if(window.localStorage){
           //エリア番号の読み取り
-　　      area_no=localStorage.getItem('area_no%');
+  　      area_no=localStorage.getItem('area_no%');
     　    //ニックネームのキーコードを作成
           key_nickname="nick_name%" + area_no;
           //ニックネームのローカルストレージを削除
@@ -216,7 +216,7 @@
             key_visit="visit_data%" + area_no;  
             let json_visit=localStorage.getItem(key_visit);
             visit_yn=JSON.parse(json_visit); //[-1,-1,-1,-1,-1,-1]
-            _count=0
+            _count=0;
             //タイトル
             var title_text=document.getElementById("title");
             if(area_no==1){
@@ -242,10 +242,10 @@
                 var e_img=document.getElementById("image" +i1);
                 //スポットが訪問済みか否かで、表示するスタンプを変える
                 if(visit_yn[i]>0){ 
-                    e_img.src="icon/stamp_good.png" 
-                    _count=_count+1
+                    e_img.src="icon/stamp_good.png"; 
+                    _count=_count+1;
                 } else {
-                    e_img.src="icon/stamp_ng.png"
+                    e_img.src="icon/stamp_ng.png";
                 };
                 //画像にクリックイベントを付加
                 e_img.addEventListener('click', function(event){
@@ -285,7 +285,7 @@
                     document.getElementById("appendix").style.display='block';
                     document.getElementById("nickname").textContent=_nickname + " さん >>> スタンプ：" + _count +' 個';
                     // document.getElementById("number").textContent='No.:'+ year + month + day +hour + minute + second;
-                }
+        }
         else {
               alert('ローカルストレージは使えません');
         }
@@ -381,6 +381,7 @@
   </script> 
 </body>
 </html>
+
 
 
 
