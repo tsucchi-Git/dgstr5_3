@@ -49,6 +49,14 @@
     border: 1px solid #333;
     background: #c9f506;
   }
+  .text-number{
+    font-size:20%;
+    text-align: raight;
+    color:black;
+    font-family:Arial;
+    margin-top:-3px;
+    margin-bottom:-3px;
+  }
 </style>
 <body>
   <nav>
@@ -61,6 +69,7 @@
    </nav>
   <div id="title" class="page-title"></div>
   <p id="nickname" class="text-begin"></p>  
+  <p id="number" class="text-number"></p>  
   <form id="form_nickname" class="form">
       <lable>スタンプ帳にニックネームが表示されます。<br>好きな名前を入力してください。<br><br></lable>
       <lable for "textform">ニックネーム：</lable>
@@ -269,11 +278,16 @@
               document.getElementById("form_nickname").style.display='none';
               //ローカルストレージからニックネームの読み込み
               _nickname=localStorage.getItem(key_nickname);
-              //ニックネーム、スタンプ一覧表、注釈を表示にする
+              //関数get_date_timeを呼び出し、年月日時分秒を読み込む
+              get_date_time(year,month,day,hour,minute,second)
+              //ニックネーム、利用者番号、スタンプ一覧表、注釈を表示にする
               document.getElementById("nickname").style.display='block';
+              document.getElementById("number").style.display='block';
               document.getElementById("table_display").style.display='block';
               document.getElementById("appendix").style.display='block';
               document.getElementById("nickname").textContent=_nickname + " さん >>> スタンプ：" + _count +' 個';
+              document.getElementById("number").textContent='No.:'+ year + month + day +hour + minute + second;
+              //日付の取得
             }
               //画像がクリックされたときに発生するイベント
               function spot_jamp_detail_from_stampnote(flag_element,str_target,markerList){
@@ -309,8 +323,9 @@
       function prompt_nickname(){
         //インプットボックスをクリアする
         document.getElementById("name").value = "";
-        //ニックネーム、スタンプ一覧表、注釈を非表示にする
+        //ニックネーム、利用者番号、スタンプ一覧表、注釈を非表示にする
           document.getElementById("nickname").style.display='none';
+          document.getElementById("number").style.display='none';
           document.getElementById("table_display").style.display='none';
           document.getElementById("appendix").style.display='none';
         //実行ボタンがクリックされたときに発生するイベントを記述
@@ -344,8 +359,9 @@
                 }else{
                     //入力フォームを非表示にする。
                     document.getElementById("form_nickname").style.display='none';
-                    //ニックネーム、スタンプ一覧表、注釈を表示にする
+                    //ニックネーム、利用者番号、スタンプ一覧表、注釈を表示にする
                     document.getElementById("nickname").style.display='block';
+                    document.getElementById("number").style.display='block';
                     document.getElementById("table_display").style.display='block';
                     document.getElementById("appendix").style.display='block';
                     document.getElementById("nickname").textContent=_nickname + " さん >>> スタンプ：" + _count +' 個';
@@ -356,10 +372,21 @@
                     }
                 }
           })
-        }
+      }
+      //ニックネーム入力用のフォーム
+      function get_date_time(year,month,day,hour,minute,second){
+        const today = new Date(); // 現在の日付を取得
+        const year = today.getFullYear(); // 年を取得
+        const month = today.getMonth() + 1; // 月を取得（0から始まるため+1）
+        const day = today.getDate(); // 日を取得
+        const hour=today.getHours();//時間を取得
+        const minute=today.getMinutes();//分を取得
+        const second=today.getSeconds();//秒を取得
+      }  
   </script> 
 </body>
 </html>
+
 
 
 
